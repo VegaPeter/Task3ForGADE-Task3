@@ -10,15 +10,17 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable] public class Map
     {
+        //Declares list to hold the units and buildings
         public List<Unit> units = new List<Unit>();
         public List<Building> buildings = new List<Building>();
 
+        //Declares random class and other useful variables
         Random r = new Random();
         public int numUnits = 0;
         public int numBuildings = 0;
         TextBox txtInfo;
 
-
+        //Fields 
         public List<Unit> Units
         {
             get { return units; }
@@ -31,7 +33,7 @@ namespace Peter_Spanos_19013035_Task2
             set { buildings = value; }
         }
 
-
+        //Constructor
         public Map(int n, TextBox txt, int noBuilds)
         {
             units = new List<Unit>();
@@ -41,6 +43,7 @@ namespace Peter_Spanos_19013035_Task2
             numBuildings = noBuilds;
         }
 
+        //Handles generation of the units
         public void Generate()
         {
             for(int i = 0; i < numUnits; i++)
@@ -97,6 +100,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Displays the units onto the form
         public void Display(GroupBox groupBox)
         {
             groupBox.Controls.Clear();
@@ -184,6 +188,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Adds a unit's info to the ToString
         public void Unit_Click(object sender, EventArgs e)
         {
             int x, y;
@@ -214,6 +219,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Adds a building's info to the ToString
         public void Building_Click(object sender, EventArgs e)
         {
             int x, y;

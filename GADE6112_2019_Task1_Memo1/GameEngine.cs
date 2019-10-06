@@ -9,16 +9,19 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable] public class GameEngine
     {
+        //Declarations for the GameEngine class
         public Map map;
         private int round;
         Random r = new Random();
         GroupBox grpMap;
 
+        //Fields
         public int Round
         {
             get { return round; }
         }
 
+        //Constructor
         public GameEngine(int numUnits, TextBox txtInfoUnits, GroupBox gMap, int noBuilds)
         {
             grpMap = gMap;
@@ -29,6 +32,7 @@ namespace Peter_Spanos_19013035_Task2
             round = 1; 
         }
 
+        //Updates the map to display the units' movement, combat and deaths
         public void Update()
         {
             for(int i = 0; i < map.Units.Count; i++)
@@ -165,6 +169,7 @@ namespace Peter_Spanos_19013035_Task2
             round++;
         }
 
+        //Determines the distance between two units
         public int DistanceTo(Unit a, Unit b)
         {
             int distance = 0;

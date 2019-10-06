@@ -8,6 +8,7 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable] public class MeleeUnit : Unit
     {
+        //Fields the class needs access to
         //isDead field used for Death method
         public bool IsDead { get; set; }
 
@@ -73,7 +74,7 @@ namespace Peter_Spanos_19013035_Task2
             set { base.name = value; }
         }
 
-
+        //Constructor for the MeleeUnit Class
         public MeleeUnit(int x, int y, int h, int s, int a, int f, string sy)
         {
             XPos = x;
@@ -91,12 +92,15 @@ namespace Peter_Spanos_19013035_Task2
             
         }
 
+        //OVERRIDE METHODS
+        //Handles a unit's death
         public override void Death()
         {
             symbol = "_";
             IsDead = true;
         }
 
+        //Handles movement
         public override void Move(int dir)
         {
             switch(dir)
@@ -109,6 +113,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Handles combat
         public override void Combat(Unit attacker)
         {
             if (attacker is MeleeUnit)
@@ -127,6 +132,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Handles the distance between units
         public override bool InRange(Unit other)
         {
             int distance = 0;
@@ -154,6 +160,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Determines the closest unit
         public override (Unit, int) Closest(List<Unit> units)
         {
             int shortest = 100;
@@ -188,6 +195,7 @@ namespace Peter_Spanos_19013035_Task2
             return (closest,shortest);
         }
 
+        //Handles a unit's information
         public override string ToString()
         {
             string temp = "";

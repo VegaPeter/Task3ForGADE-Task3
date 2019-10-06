@@ -9,6 +9,7 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable] public class RangedUnit : Unit
     {
+        //Fields that the RangedUnit class needs access to
         public bool IsDead { get; set; }
 
         public int XPos
@@ -73,6 +74,7 @@ namespace Peter_Spanos_19013035_Task2
             set { base.name = value; }
         }
 
+         //RangedUnit Constructor
         public RangedUnit(int x, int y, int h, int s, int a, int ar, int f, string sy)
         {
             XPos = x;
@@ -88,13 +90,15 @@ namespace Peter_Spanos_19013035_Task2
             IsAttacking = false;
             IsDead = false; 
         }
-
+        //OVERRIDE METHODS
+        //Method to handle a units death
         public override void Death()
         {
             symbol = "_";
             IsDead = true;
         }
 
+        //Method to handle where the unit moves
         public override void Move(int dir)
         {
             switch(dir)
@@ -107,6 +111,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Method to handle a unit's combat
         public override void Combat(Unit attacker)
         {
             if (attacker is MeleeUnit)
@@ -125,6 +130,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Method to determine which unit is closest and therefore should be attacked
         public override bool InRange(Unit other)
         {
             int distance = 0;
@@ -152,6 +158,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Handling additional distance calculations
         public override (Unit, int) Closest(List<Unit> units)
         {
             int shortest = 100;
@@ -186,6 +193,7 @@ namespace Peter_Spanos_19013035_Task2
             return (closest, shortest);
         }
 
+        //Override string to handle a unit's information
         public override string ToString()
         {
             string temp = "";

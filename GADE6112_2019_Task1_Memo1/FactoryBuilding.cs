@@ -9,10 +9,12 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable]public class FactoryBuilding : Building
     {
+        //Declarations of variables
         protected string unitType;
         protected int productionSpeed;
         protected int spawnPoint;
 
+        //Constructor for FactoryBuilding class
         public FactoryBuilding(int x, int y, int h, int f, string sy, bool des, string unT)
         {
             xPos = x;
@@ -24,6 +26,7 @@ namespace Peter_Spanos_19013035_Task2
             unitType = unT;
         }
 
+        //Fields
         public int XPos
         {
             get { return base.xPos; }
@@ -67,6 +70,7 @@ namespace Peter_Spanos_19013035_Task2
             get { return productionSpeed; }
         }
 
+        //Method for the buildings to generate units 
         public Unit BuildUnit(int factions)
         {
             if(faction == 1)
@@ -133,12 +137,14 @@ namespace Peter_Spanos_19013035_Task2
             return rb;
         }
 
+        //Method to destroy buildings
         public override void Destruction()
         {
             symbol = ",,,";
             isDestroyed = true;
         }
 
+        //ToString method to handle the information of Factory Buildings
         public override string ToString()
         {
             string temp = "";
