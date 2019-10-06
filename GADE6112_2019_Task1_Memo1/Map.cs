@@ -64,7 +64,7 @@ namespace PeterSpanos_Task3_19013035
         {
             for(int i = 0; i < numUnits; i++)
             {
-               if(r.Next(0,2) == 0) //Generate Melee Unit
+               if(r.Next(0,3) == 0) //Generate Melee Unit
                 {
                     MeleeUnit m = new MeleeUnit(r.Next(0, 10),
                                                 r.Next(0, 10),
@@ -75,7 +75,7 @@ namespace PeterSpanos_Task3_19013035
                                                 "M/");
                     units.Add(m);
                 }
-               else // Generate Ranged Unit
+               else if (r.Next(0,3) == 1) // Generate Ranged Unit
                 {
                     RangedUnit ru = new RangedUnit(r.Next(0, 10),
                                                 r.Next(0, 10),
@@ -86,6 +86,18 @@ namespace PeterSpanos_Task3_19013035
                                                 (i % 2 == 0 ? 1 : 0),
                                                 "R}");
                     units.Add(ru);
+                }
+                else
+                {
+                    WizardUnit wu = new WizardUnit(r.Next(0, 10),
+                                                r.Next(0, 10),
+                                                100,
+                                                1,
+                                                20,
+                                                1,
+                                                (i % 2 == 0 ? 1 : 0),
+                                                "W-");
+                    units.Add(wu);
                 }
             }
 
@@ -141,7 +153,7 @@ namespace PeterSpanos_Task3_19013035
                         b.ForeColor = Color.Blue ;
                     }
                 }
-                else
+                else if (u is RangedUnit)
                 {
                     RangedUnit ru = (RangedUnit)u;
                     b.Size = new Size(30, 30);
@@ -156,6 +168,22 @@ namespace PeterSpanos_Task3_19013035
                         b.ForeColor = Color.Blue;
                     }
                 }
+                else
+                {
+                    WizardUnit wu = (WizardUnit)u;
+                    b.Size = new Size(30, 30);
+                    b.Location = new Point(wu.XPos * 30, wu.YPos * 30);
+                    b.Text = wu.Symbol;
+                    if (wu.Faction == 0)
+                    {
+                        b.ForeColor = Color.HotPink;
+                    }
+                    else
+                    {
+                        b.ForeColor = Color.Blue;
+                    }
+                }
+
                 b.Click += Unit_Click;
                 groupBox.Controls.Add(b);
             }
@@ -230,6 +258,15 @@ namespace PeterSpanos_Task3_19013035
                     {
                         txtInfo.Text = "";
                         txtInfo.Text = mu.ToString();
+                    }
+                }
+                else if (u is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)u;
+                    if (wu.XPos == x && wu.YPos == y)
+                    {
+                        txtInfo.Text = "";
+                        txtInfo.Text = wu.ToString();
                     }
                 }
             }

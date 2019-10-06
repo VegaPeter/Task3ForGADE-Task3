@@ -164,7 +164,69 @@ namespace PeterSpanos_Task3_19013035
                     }
 
                 }
+                else if (map.Units[i] is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)map.Units[i];
+                    if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
+                    {
+                        wu.Move(r.Next(0, 4));
+                    }
+                    else
+                    {
+                        (Unit closest, int distanceTo) = wu.Closest(map.Units);
 
+                        //Check In Range
+                        if (distanceTo <= wu.AttackRange)
+                        {
+                            wu.IsAttacking = true;
+                            wu.Combat(closest);
+                        }
+                        else //Move Towards
+                        {
+                            if (closest is MeleeUnit)
+                            {
+                                MeleeUnit closestMu = (MeleeUnit)closest;
+                                if (wu.XPos > closestMu.XPos) //North
+                                {
+                                    wu.Move(0);
+                                }
+                                else if (wu.XPos < closestMu.XPos) //South
+                                {
+                                    wu.Move(2);
+                                }
+                                else if (wu.YPos > closestMu.YPos) //West
+                                {
+                                    wu.Move(3);
+                                }
+                                else if (wu.YPos < closestMu.YPos) //East
+                                {
+                                    wu.Move(1);
+                                }
+                            }
+                            else if (closest is RangedUnit)
+                            {
+                                RangedUnit closestRu = (RangedUnit)closest;
+                                if (wu.XPos > closestRu.XPos) //North
+                                {
+                                    wu.Move(0);
+                                }
+                                else if (wu.XPos < closestRu.XPos) //South
+                                {
+                                    wu.Move(2);
+                                }
+                                else if (wu.YPos > closestRu.YPos) //West
+                                {
+                                    wu.Move(3);
+                                }
+                                else if (wu.YPos < closestRu.YPos) //East
+                                {
+                                    wu.Move(1);
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
             map.Display(grpMap);
             round++;
@@ -199,8 +261,27 @@ namespace PeterSpanos_Task3_19013035
                 RangedUnit end = (RangedUnit)b;
                 distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
             }
+            //Add wizards
+            else if (a is WizardUnit && b is WizardUnit)
+            {
+                WizardUnit start = (WizardUnit)a;
+                WizardUnit end = (WizardUnit)b;
+                distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
+            }
+            else if (a is WizardUnit && b is MeleeUnit)
+            {
+                WizardUnit start = (WizardUnit)a;
+                MeleeUnit end = (MeleeUnit)b;
+                distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
+            }
+            else if (a is WizardUnit && b is RangedUnit)
+            {
+                WizardUnit start = (WizardUnit)a;
+                RangedUnit end = (RangedUnit)b;
+                distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
+            }
+
             return distance;
         }
-
     }
 }

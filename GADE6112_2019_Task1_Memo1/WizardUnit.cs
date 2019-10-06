@@ -65,6 +65,167 @@ namespace PeterSpanos_Task3_19013035
             set { base.name = value; }
         }
 
+        //WizardUnit Constructor
+        public WizardUnit(int x, int y, int h, int s, int a, int ar, int f, string sy)
+        {
+            XPos = x;
+            YPos = y;
+            Health = h;
+            base.maxHealth = h;
+            Speed = s;
+            Attack = a;
+            AttackRange = ar;
+            base.faction = f;
+            Symbol = sy;
+            Name = "Mage";
+            IsAttacking = false;
+            IsDead = false;
+        }
 
+        //OVERRIDE METHODS
+        //Method to handle a units death
+        public override void Death()
+        {
+            symbol = "_";
+            IsDead = true;
+        }
+
+        //Method to handle where the unit moves
+        public override void Move(int dir)
+        {
+            switch (dir)
+            {
+                case 0: YPos--; break; //North
+                case 1: XPos++; break; //East
+                case 2: YPos++; break; //South
+                case 3: XPos--; break; //West
+                default: break;
+            }
+        }
+
+        //Method to handle a unit's combat
+        public override void Combat(Unit attacker)
+        {
+            if (attacker is MeleeUnit)
+            {
+                Health = Health - ((MeleeUnit)attacker).Attack;
+            }
+            else if (attacker is RangedUnit)
+            {
+                RangedUnit ru = (RangedUnit)attacker;
+                Health = Health - (ru.Attack - ru.AttackRange);
+            }
+            else if (attacker is WizardUnit)
+            {
+                Health = Health - ((WizardUnit)attacker.Attack);
+            }
+
+            if (Health <= 0)
+            {
+                Death(); //Me_IRL
+            }
+        }
+
+        //Method to determine which unit is closest and therefore should be attacked
+        public override bool InRange(Unit other, Building otherino)
+        {
+            int distance = 0;
+            int otherX = 0;
+            int otherY = 0;
+            if (other is MeleeUnit)
+            {
+                otherX = ((MeleeUnit)other).XPos;
+                otherY = ((MeleeUnit)other).YPos;
+            }
+            else if (other is RangedUnit)
+            {
+                otherX = ((RangedUnit)other).XPos;
+                otherY = ((RangedUnit)other).YPos;
+            }
+            else if (other is WizardUnit)
+            {
+                otherX = ((WizardUnit)other).XPos;
+                otherY = ((WizardUnit)other).YPos;
+            }
+            else if (otherino is FactoryBuilding)
+            {
+                otherX = ((FactoryBuilding)otherino).XPos;
+                otherY = ((FactoryBuilding)otherino).YPos;
+            }
+            else if (otherino is ResourceBuilding)
+            {
+                otherX = ((ResourceBuilding)otherino).XPos;
+                otherY = ((ResourceBuilding)otherino).YPos;
+            }
+
+            distance = Math.Abs(XPos - otherX) + Math.Abs(YPos - otherY);
+            if (distance <= AttackRange)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Handling additional distance calculations
+        public override (Unit, int) Closest(List<Unit> units)
+        {
+            int shortest = 100;
+            Unit closest = this;
+            //Closest Unit and Distance                    
+            foreach (Unit u in units)
+            {
+                if (u is MeleeUnit)
+                {
+                    MeleeUnit otherMu = (MeleeUnit)u;
+                    int distance = Math.Abs(this.XPos - otherMu.XPos)
+                               + Math.Abs(this.YPos - otherMu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherMu;
+                    }
+                }
+                else if (u is RangedUnit)
+                {
+                    RangedUnit otherRu = (RangedUnit)u;
+                    int distance = Math.Abs(this.XPos - otherRu.XPos)
+                               + Math.Abs(this.YPos - otherRu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRu;
+                    }
+                }
+                else if (u is WizardUnit)
+                {
+                    WizardUnit otherWu = (WizardUnit)u;
+                    int distance = Math.Abs(this.XPos - otherWu.XPos)
+                               + Math.Abs(this.YPos - otherWu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherWu;
+                    }
+                }
+
+            }
+            return (closest, shortest);
+        }
+
+        //Override string to handle a unit's information
+        public override string ToString()
+        {
+            string temp = "";
+            temp += "Name: " + name;
+            temp += " {" + Symbol + "}";
+            temp += " (" + XPos + "," + YPos + ") ";
+            temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
+            temp += (IsDead ? " DEAD!" : " ALIVE!");
+
+            return temp;
+        }
     }
 }
