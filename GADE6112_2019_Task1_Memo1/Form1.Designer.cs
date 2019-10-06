@@ -1,4 +1,4 @@
-﻿namespace Peter_Spanos_19013035_Task2
+﻿namespace PeterSpanos_Task3_19013035
 {
     partial class Form1
     {

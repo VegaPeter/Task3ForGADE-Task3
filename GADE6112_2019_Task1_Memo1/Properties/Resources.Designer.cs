@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Peter_Spanos_19013035_Task2.Properties {
+namespace PeterSpanos_Task3_19013035.Properties {
     using System;
     
     

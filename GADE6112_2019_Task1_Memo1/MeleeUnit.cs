@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Peter_Spanos_19013035_Task2
+namespace PeterSpanos_Task3_19013035
 {
     [Serializable] public class MeleeUnit : Unit
     {

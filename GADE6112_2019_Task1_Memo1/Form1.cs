@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Peter_Spanos_19013035_Task2
+namespace PeterSpanos_Task3_19013035
 {
     [Serializable] public partial class Form1 : Form
     {
