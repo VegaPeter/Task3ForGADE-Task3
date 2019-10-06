@@ -18,6 +18,8 @@ namespace PeterSpanos_Task3_19013035
         Random r = new Random();
         public int numUnits = 0;
         public int numBuildings = 0;
+        public int height,
+                   width;
         TextBox txtInfo;
 
         //Fields 
@@ -33,14 +35,28 @@ namespace PeterSpanos_Task3_19013035
             set { buildings = value; }
         }
 
+        public int Height
+        {
+            get { return height; }
+            set { height = value; }
+        }
+
+        public int Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+
         //Constructor
-        public Map(int n, TextBox txt, int noBuilds)
+        public Map(int n, TextBox txt, int noBuilds, int hght, int wdth)
         {
             units = new List<Unit>();
             buildings = new List<Building>();
             numUnits = n;
             txtInfo = txt;
             numBuildings = noBuilds;
+            height = hght;
+            width = wdth;
         }
 
         //Handles generation of the units
@@ -226,8 +242,8 @@ namespace PeterSpanos_Task3_19013035
 
             Button b = (Button)sender;
 
-            x = b.Location.X / 30;
-            y = b.Location.Y / 30;
+            x = b.Location.X / width;
+            y = b.Location.Y / height;
 
             foreach (Building bud in buildings)
             {

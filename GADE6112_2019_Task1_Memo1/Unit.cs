@@ -24,7 +24,7 @@ namespace PeterSpanos_Task3_19013035
         //Abstract methods 
         public abstract void Move(int dir);
         public abstract void Combat(Unit attacker);
-        public abstract bool InRange(Unit other);
+        public abstract bool InRange(Unit other, Building otherino);
         public abstract (Unit, int ) Closest(List<Unit> units);
         public abstract void Death();
         public abstract override string ToString();

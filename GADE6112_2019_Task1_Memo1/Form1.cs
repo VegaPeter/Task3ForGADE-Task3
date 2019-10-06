@@ -16,6 +16,8 @@ namespace PeterSpanos_Task3_19013035
     {
         GameEngine engine;
         BinaryFormatter bf = new BinaryFormatter();
+        int mapHeight,
+            mapWidth;
 
         public Form1()
         {
@@ -46,7 +48,22 @@ namespace PeterSpanos_Task3_19013035
         //Sends how many units and buildings must be built
         private void Form1_Load(object sender, EventArgs e)
         {
-            engine = new GameEngine(20, txtInfo, grpMap, 4);
+            btnEnter.Visible = true;
+            lblHeight.Visible = true;
+            lblWidth.Visible = true;
+            txtHeight.Visible = true;
+            txtWidth.Visible = true;
+
+            grpMap.Visible = false;
+            btnPause.Visible = false;
+            btnRead.Visible = false;
+            btnSave.Visible = false;
+            btnStart.Visible = false;
+            txtInfo.Visible = false;
+            lblRound.Visible = false;
+
+
+            engine = new GameEngine(20, txtInfo, grpMap, 4, mapHeight, mapWidth);
         }
 
         private void txtInfo_TextChanged(object sender, EventArgs e)
@@ -107,6 +124,26 @@ namespace PeterSpanos_Task3_19013035
                 MessageBox.Show(ex.Message, "Error");
             }
             engine.Update();
-        } 
+        }
+
+        private void btnEnter_Click(object sender, EventArgs e)
+        {
+            mapHeight = Convert.ToInt32(txtHeight.Text);
+            mapWidth = Convert.ToInt32(txtWidth.Text);
+
+            btnEnter.Visible = false;
+            lblHeight.Visible = false;
+            lblWidth.Visible = false;
+            txtHeight.Visible = false;
+            txtWidth.Visible = false;
+
+            grpMap.Visible = true;
+            btnPause.Visible = true;
+            btnRead.Visible = true;
+            btnSave.Visible = true;
+            btnStart.Visible = true;
+            txtInfo.Visible = true;
+            lblRound.Visible = true;
+        }
     }
 }

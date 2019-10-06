@@ -131,7 +131,7 @@ namespace PeterSpanos_Task3_19013035
         }
 
         //Method to determine which unit is closest and therefore should be attacked
-        public override bool InRange(Unit other)
+        public override bool InRange(Unit other, Building otherino)
         {
             int distance = 0;
             int otherX = 0;
@@ -145,6 +145,16 @@ namespace PeterSpanos_Task3_19013035
             {
                 otherX = ((RangedUnit)other).XPos;
                 otherY = ((RangedUnit)other).YPos;
+            }
+            else if (otherino is FactoryBuilding)
+            {
+                otherX = ((FactoryBuilding)otherino).XPos;
+                otherY = ((FactoryBuilding)otherino).YPos;
+            }
+            else if (otherino is ResourceBuilding)
+            {
+                otherX = ((ResourceBuilding)otherino).XPos;
+                otherY = ((ResourceBuilding)otherino).YPos;
             }
 
             distance = Math.Abs(XPos - otherX) + Math.Abs(YPos - otherY);

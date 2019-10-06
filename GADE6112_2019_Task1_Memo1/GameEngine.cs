@@ -22,10 +22,10 @@ namespace PeterSpanos_Task3_19013035
         }
 
         //Constructor
-        public GameEngine(int numUnits, TextBox txtInfoUnits, GroupBox gMap, int noBuilds)
+        public GameEngine(int numUnits, TextBox txtInfoUnits, GroupBox gMap, int noBuilds, int height, int width)
         {
             grpMap = gMap;
-            map = new Map(numUnits, txtInfoUnits, noBuilds);
+            map = new Map(numUnits, txtInfoUnits, noBuilds, height, width);
             map.Generate();
             map.Display(grpMap);
 
@@ -164,6 +164,7 @@ namespace PeterSpanos_Task3_19013035
                     }
 
                 }
+
             }
             map.Display(grpMap);
             round++;

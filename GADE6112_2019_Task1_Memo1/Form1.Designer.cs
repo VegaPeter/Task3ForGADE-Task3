@@ -37,6 +37,11 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSave = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.btnEnter = new System.Windows.Forms.Button();
+            this.lblHeight = new System.Windows.Forms.Label();
+            this.txtWidth = new System.Windows.Forms.TextBox();
+            this.lblWidth = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // grpMap
@@ -112,13 +117,60 @@
             this.btnRead.UseVisualStyleBackColor = true;
             this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
+            // txtHeight
+            // 
+            this.txtHeight.Location = new System.Drawing.Point(428, 411);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(111, 20);
+            this.txtHeight.TabIndex = 0;
+            // 
+            // btnEnter
+            // 
+            this.btnEnter.Location = new System.Drawing.Point(428, 437);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(271, 24);
+            this.btnEnter.TabIndex = 1;
+            this.btnEnter.Text = "Enter";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
+            // 
+            // lblHeight
+            // 
+            this.lblHeight.AutoSize = true;
+            this.lblHeight.Location = new System.Drawing.Point(425, 395);
+            this.lblHeight.Name = "lblHeight";
+            this.lblHeight.Size = new System.Drawing.Size(62, 13);
+            this.lblHeight.TabIndex = 2;
+            this.lblHeight.Text = "Map Height";
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(588, 411);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(111, 20);
+            this.txtWidth.TabIndex = 3;
+            // 
+            // lblWidth
+            // 
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Location = new System.Drawing.Point(640, 395);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(59, 13);
+            this.lblWidth.TabIndex = 4;
+            this.lblWidth.Text = "Map Width";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 489);
+            this.Controls.Add(this.btnEnter);
+            this.Controls.Add(this.lblWidth);
             this.Controls.Add(this.btnRead);
+            this.Controls.Add(this.txtWidth);
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.lblHeight);
+            this.Controls.Add(this.txtHeight);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnPause);
@@ -142,6 +194,11 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnRead;
+        private System.Windows.Forms.Label lblWidth;
+        private System.Windows.Forms.TextBox txtWidth;
+        private System.Windows.Forms.Label lblHeight;
+        private System.Windows.Forms.Button btnEnter;
+        private System.Windows.Forms.TextBox txtHeight;
     }
 }
 

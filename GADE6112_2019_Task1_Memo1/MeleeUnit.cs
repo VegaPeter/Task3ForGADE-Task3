@@ -133,11 +133,12 @@ namespace PeterSpanos_Task3_19013035
         }
 
         //Handles the distance between units
-        public override bool InRange(Unit other)
+        public override bool InRange(Unit other, Building otherino)
         {
             int distance = 0;
             int otherX = 0;
             int otherY = 0;
+
             if (other is MeleeUnit)
             {
                 otherX = ((MeleeUnit)other).XPos;
@@ -148,8 +149,19 @@ namespace PeterSpanos_Task3_19013035
                 otherX = ((RangedUnit)other).XPos;
                 otherY = ((RangedUnit)other).YPos;
             }
+            else if (otherino is FactoryBuilding)
+            {
+                otherX = ((FactoryBuilding)otherino).XPos;
+                otherY = ((FactoryBuilding)otherino).YPos;
+            }
+            else if (otherino is ResourceBuilding)
+            {
+                otherX = ((ResourceBuilding)otherino).XPos;
+                otherY = ((ResourceBuilding)otherino).YPos;
+            }
 
             distance = Math.Abs(XPos - otherX) + Math.Abs(YPos - otherY);
+
             if(distance <= AttackRange)
             {
                 return true;
