@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Peter_Spanos_19013035_Task2
 {
+    
     [Serializable] public class ResourceBuilding : Building
     {
+        //Constructor that catches all the variables to use in their own class
         public ResourceBuilding(int x, int y, int h, int f, string sy, bool des)
         {
             xPos = x;
@@ -18,11 +20,13 @@ namespace Peter_Spanos_19013035_Task2
             isDestroyed = des;
         }
 
+        //Additional variables to be used in the class
         private string resourceType = "Grog";
         private int resourcesGenerated = 0;
         private int resourcesGeneratedPerRound;
         private int resourcePool = 100;
 
+        //Fields that the class requires access to 
         public int XPos
         {
             get { return base.xPos; }
@@ -66,6 +70,7 @@ namespace Peter_Spanos_19013035_Task2
             isDestroyed = true;
         }
 
+        //Override string to send unit information
         public override string ToString()
         {
             string temp = "";
@@ -78,6 +83,7 @@ namespace Peter_Spanos_19013035_Task2
             return temp;
         }
 
+        //Method that handles the round to round changes for the building
         public int ResourceTick()
         {
             resourceType = "Grog"; //Resource name

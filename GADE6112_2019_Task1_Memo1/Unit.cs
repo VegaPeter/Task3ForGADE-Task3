@@ -8,6 +8,7 @@ namespace Peter_Spanos_19013035_Task2
 {
     [Serializable] public abstract class Unit
     {
+        //Protected variables for other classes to inherit
         protected int xPos,
                       yPos,
                       health,
@@ -20,6 +21,7 @@ namespace Peter_Spanos_19013035_Task2
         protected bool isAttacking;
         protected string name;
 
+        //Abstract methods 
         public abstract void Move(int dir);
         public abstract void Combat(Unit attacker);
         public abstract bool InRange(Unit other);
