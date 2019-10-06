@@ -22,17 +22,20 @@ namespace Peter_Spanos_19013035_Task2
             InitializeComponent();
         }
 
+        //Activates the round timer
         private void BtnStart_Click(object sender, EventArgs e)
         {
             timer1.Enabled = true;
         }
 
+        //Pauses the timer
         private void BtnPause_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
             btnStart.Text = "Resume";
         }
 
+        //Updates the round timer
         private void Timer1_Tick(object sender, EventArgs e)
         {
             lblRound.Text = "Round: " + engine.Round.ToString();
@@ -51,6 +54,7 @@ namespace Peter_Spanos_19013035_Task2
 
         }
 
+        //Serializes the data to a file
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -77,6 +81,7 @@ namespace Peter_Spanos_19013035_Task2
             }
         }
 
+        //Deserializes the file and loads the save state
         private void btnRead_Click(object sender, EventArgs e)
         {
             try
