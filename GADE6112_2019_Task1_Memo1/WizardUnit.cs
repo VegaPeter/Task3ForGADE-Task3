@@ -117,7 +117,7 @@ namespace PeterSpanos_Task3_19013035
             }
             else if (attacker is WizardUnit)
             {
-                Health = Health - ((WizardUnit)attacker.Attack);
+                //Health = Health - ((WizardUnit)attacker.Attack);
             }
 
             if (Health <= 0)

@@ -12,6 +12,7 @@ namespace PeterSpanos_Task3_19013035
     {
         //Declares list to hold the units and buildings
         public List<Unit> units = new List<Unit>();
+        public List<Unit> neutralUnits = new List<Unit>();
         public List<Building> buildings = new List<Building>();
 
         //Declares random class and other useful variables
@@ -62,9 +63,10 @@ namespace PeterSpanos_Task3_19013035
         //Handles generation of the units
         public void Generate()
         {
-            for(int i = 0; i < numUnits; i++)
+            //PvP Teams
+            for (int i = 0; i < numUnits; i++)
             {
-               if(r.Next(0,3) == 0) //Generate Melee Unit
+                if (r.Next(0, 3) == 0) //Generate Melee Unit
                 {
                     MeleeUnit m = new MeleeUnit(r.Next(0, 10),
                                                 r.Next(0, 10),
@@ -75,7 +77,7 @@ namespace PeterSpanos_Task3_19013035
                                                 "M/");
                     units.Add(m);
                 }
-               else if (r.Next(0,3) == 1) // Generate Ranged Unit
+                else if (r.Next(0, 3) == 1) // Generate Ranged Unit
                 {
                     RangedUnit ru = new RangedUnit(r.Next(0, 10),
                                                 r.Next(0, 10),
@@ -101,9 +103,9 @@ namespace PeterSpanos_Task3_19013035
                 }
             }
 
-            for(int k = 0; k < numBuildings; k++)
+            for (int k = 0; k < numBuildings; k++)
             {
-                if(r.Next(0,2) == 0) //Generate Resource Building
+                if (r.Next(0, 2) == 0) //Generate Resource Building
                 {
                     ResourceBuilding rb = new ResourceBuilding(r.Next(0, 10),
                                                                r.Next(0, 10),
@@ -111,7 +113,7 @@ namespace PeterSpanos_Task3_19013035
                                                                (k % 2 == 0 ? 1 : 0),
                                                                "[G]",
                                                                false);
-                     buildings.Add(rb);
+                    buildings.Add(rb);
                 }
                 else //Generate Unit Building
                 {
@@ -125,6 +127,20 @@ namespace PeterSpanos_Task3_19013035
 
                     buildings.Add(fb);
                 }
+            }
+
+            //Neutral Team
+            for (int i = 0; i < numUnits; i++)
+            {
+               WizardUnit nwu = new WizardUnit(r.Next(0, 10),
+                                              r.Next(0, 10),
+                                              25,
+                                              1,
+                                              30,
+                                              1,
+                                              3,
+                                              "W-");
+                    neutralUnits.Add(nwu);
             }
         }
 
@@ -230,6 +246,21 @@ namespace PeterSpanos_Task3_19013035
                 b.Click += Building_Click;
                 groupBox.Controls.Add(b);
             }
+
+            //Creating and adding the team of neutral wizards
+            foreach(Unit u in neutralUnits)
+            {
+                Button wb = new Button();
+                WizardUnit wu = (WizardUnit)u;
+                wb.Size = new Size(30, 30);
+                wb.Location = new Point(wu.XPos * 30, wu.YPos * 30);
+                wb.Text = wu.Symbol;
+
+                wb.ForeColor = Color.DarkOrchid;
+
+                wb.Click += Unit_Click;
+                groupBox.Controls.Add(wb);
+            }    
         }
 
         //Adds a unit's info to the ToString
