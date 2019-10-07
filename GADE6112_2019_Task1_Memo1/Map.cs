@@ -130,7 +130,7 @@ namespace PeterSpanos_Task3_19013035
             }
 
             //Neutral Team
-            for (int i = 0; i < numUnits; i++)
+            for (int i = 0; i < (numUnits/2); i++)
             {
                WizardUnit nwu = new WizardUnit(r.Next(0, 10),
                                               r.Next(0, 10),
