@@ -12,7 +12,6 @@ namespace PeterSpanos_Task3_19013035
     {
         //Declares list to hold the units and buildings
         public List<Unit> units = new List<Unit>();
-        public List<Unit> neutralUnits = new List<Unit>();
         public List<Building> buildings = new List<Building>();
 
         //Declares random class and other useful variables
@@ -68,8 +67,8 @@ namespace PeterSpanos_Task3_19013035
             {
                 if (r.Next(0, 3) == 0) //Generate Melee Unit
                 {
-                    MeleeUnit m = new MeleeUnit(r.Next(0, 12),
-                                                r.Next(0, 12),
+                    MeleeUnit m = new MeleeUnit(r.Next(0, width),
+                                                r.Next(0, height),
                                                 100,
                                                 1,
                                                 25,
@@ -79,8 +78,8 @@ namespace PeterSpanos_Task3_19013035
                 }
                 else if (r.Next(0, 3) == 1) // Generate Ranged Unit
                 {
-                    RangedUnit ru = new RangedUnit(r.Next(0, 12),
-                                                r.Next(0, 12),
+                    RangedUnit ru = new RangedUnit(r.Next(0, width),
+                                                r.Next(0, height),
                                                 75,
                                                 2,
                                                 20,
@@ -91,13 +90,13 @@ namespace PeterSpanos_Task3_19013035
                 }
                 else
                 {
-                    WizardUnit wu = new WizardUnit(r.Next(0, 15),
-                                                r.Next(0, 15),
+                    WizardUnit wu = new WizardUnit(r.Next(0, width),
+                                                r.Next(0, height),
                                                 50,
                                                 5,
                                                 50,
                                                 1,
-                                                (i % 2 == 0 ? 1 : 0),
+                                                3,
                                                 "W-");
                     units.Add(wu);
                 }
@@ -107,8 +106,8 @@ namespace PeterSpanos_Task3_19013035
             {
                 if (r.Next(0, 2) == 0) //Generate Resource Building
                 {
-                    ResourceBuilding rb = new ResourceBuilding(r.Next(0, 15),
-                                                               r.Next(0, 15),
+                    ResourceBuilding rb = new ResourceBuilding(r.Next(0, width),
+                                                               r.Next(0, height),
                                                                150,
                                                                (k % 2 == 0 ? 1 : 0),
                                                                "[G]",
@@ -117,8 +116,8 @@ namespace PeterSpanos_Task3_19013035
                 }
                 else //Generate Unit Building
                 {
-                    FactoryBuilding fb = new FactoryBuilding(r.Next(0, 15),
-                                                             r.Next(0, 15),
+                    FactoryBuilding fb = new FactoryBuilding(r.Next(0, width),
+                                                             r.Next(0, height),
                                                              200,
                                                              (k % 2 == 0 ? 1 : 0),
                                                              "[F]",
@@ -127,20 +126,6 @@ namespace PeterSpanos_Task3_19013035
 
                     buildings.Add(fb);
                 }
-            }
-
-            //Neutral Team
-            for (int i = 0; i < (numUnits/2); i++)
-            {
-               WizardUnit nwu = new WizardUnit(r.Next(0, 15),
-                                              r.Next(0, 15),
-                                              25,
-                                              1,
-                                              30,
-                                              1,
-                                              3,
-                                              "W-");
-                    neutralUnits.Add(nwu);
             }
         }
 
@@ -190,14 +175,7 @@ namespace PeterSpanos_Task3_19013035
                     b.Size = new Size(30, 30);
                     b.Location = new Point(wu.XPos * 30, wu.YPos * 30);
                     b.Text = wu.Symbol;
-                    if (wu.Faction == 0)
-                    {
-                        b.ForeColor = Color.HotPink;
-                    }
-                    else
-                    {
-                        b.ForeColor = Color.Blue;
-                    }
+                    b.ForeColor = Color.Black;
                 }
 
                 b.Click += Unit_Click;
@@ -246,21 +224,6 @@ namespace PeterSpanos_Task3_19013035
                 b.Click += Building_Click;
                 groupBox.Controls.Add(b);
             }
-
-            //Creating and adding the team of neutral wizards
-            foreach(Unit u in neutralUnits)
-            {
-                Button wb = new Button();
-                WizardUnit wu = (WizardUnit)u;
-                wb.Size = new Size(30, 30);
-                wb.Location = new Point(wu.XPos * 30, wu.YPos * 30);
-                wb.Text = wu.Symbol;
-
-                wb.ForeColor = Color.DarkOrchid;
-
-                wb.Click += Unit_Click;
-                groupBox.Controls.Add(wb);
-            }    
         }
 
         //Adds a unit's info to the ToString
@@ -299,17 +262,6 @@ namespace PeterSpanos_Task3_19013035
                         txtInfo.Text = "";
                         txtInfo.Text = wu.ToString();
                     }
-                }
-            }
-
-            //Handles ToString for neutral wizards
-            foreach(Unit nwu in neutralUnits)
-            {
-                WizardUnit wu = (WizardUnit)nwu;
-                if (wu.XPos == x && wu.YPos == y)
-                {
-                    txtInfo.Text = "";
-                    txtInfo.Text = wu.ToString();
                 }
             }
         }

@@ -52,53 +52,109 @@ namespace PeterSpanos_Task3_19013035
                     else
                     {
                         (Unit closest, int distanceTo) = mu.Closest(map.Units);
+                        (Building buildingclosest, int distanceToBuilding) = mu.BuildingClosest(map.Buildings);
 
-                        //Check In Range
-                        if (distanceTo <= mu.AttackRange)
+                        if (distanceTo > distanceToBuilding)
                         {
-                            mu.IsAttacking = true;
-                            mu.Combat(closest);
-                        }
-                        else //Move Towards
-                        {
-                            if (closest is MeleeUnit)
+                            //Check In Range
+                            if (distanceTo <= mu.AttackRange)
                             {
-                                MeleeUnit closestMu = (MeleeUnit)closest;
-                                if (mu.XPos > closestMu.XPos) //North
+                                mu.IsAttacking = true;
+                                mu.Combat(closest);
+                            }
+                            else //Move Towards
+                            {
+                                if (closest is MeleeUnit)
                                 {
-                                    mu.Move(0);
+                                    MeleeUnit closestMu = (MeleeUnit)closest;
+                                    if (mu.XPos > closestMu.XPos) //North
+                                    {
+                                        mu.Move(0);
+                                    }
+                                    else if (mu.XPos < closestMu.XPos) //South
+                                    {
+                                        mu.Move(2);
+                                    }
+                                    else if (mu.YPos > closestMu.YPos) //West
+                                    {
+                                        mu.Move(3);
+                                    }
+                                    else if (mu.YPos < closestMu.YPos) //East
+                                    {
+                                        mu.Move(1);
+                                    }
                                 }
-                                else if (mu.XPos < closestMu.XPos) //South
+                                else if (closest is RangedUnit)
                                 {
-                                    mu.Move(2);
-                                }
-                                else if (mu.YPos > closestMu.YPos) //West
-                                {
-                                    mu.Move(3);
-                                }
-                                else if (mu.YPos < closestMu.YPos) //East
-                                {
-                                    mu.Move(1);
+                                    RangedUnit closestRu = (RangedUnit)closest;
+                                    if (mu.XPos > closestRu.XPos) //North
+                                    {
+                                        mu.Move(0);
+                                    }
+                                    else if (mu.XPos < closestRu.XPos) //South
+                                    {
+                                        mu.Move(2);
+                                    }
+                                    else if (mu.YPos > closestRu.YPos) //West
+                                    {
+                                        mu.Move(3);
+                                    }
+                                    else if (mu.YPos < closestRu.YPos) //East
+                                    {
+                                        mu.Move(1);
+                                    }
                                 }
                             }
-                            else if (closest is RangedUnit)
+                        }
+                        else
+                        {
+                            //Check In Range
+                            if (distanceTo <= mu.AttackRange)
                             {
-                                RangedUnit closestRu = (RangedUnit)closest;
-                                if (mu.XPos > closestRu.XPos) //North
+                                mu.IsAttacking = true;
+                                mu.Combat(closest);
+                            }
+                            else //Move Towards
+                            {
+                                if (buildingclosest is FactoryBuilding)
                                 {
-                                    mu.Move(0);
+                                    FactoryBuilding closestMu = (FactoryBuilding)buildingclosest;
+                                    if (mu.XPos > closestMu.XPos) //North
+                                    {
+                                        mu.Move(0);
+                                    }
+                                    else if (mu.XPos < closestMu.XPos) //South
+                                    {
+                                        mu.Move(2);
+                                    }
+                                    else if (mu.YPos > closestMu.YPos) //West
+                                    {
+                                        mu.Move(3);
+                                    }
+                                    else if (mu.YPos < closestMu.YPos) //East
+                                    {
+                                        mu.Move(1);
+                                    }
                                 }
-                                else if (mu.XPos < closestRu.XPos) //South
+                                else if (buildingclosest is ResourceBuilding)
                                 {
-                                    mu.Move(2);
-                                }
-                                else if (mu.YPos > closestRu.YPos) //West
-                                {
-                                    mu.Move(3);
-                                }
-                                else if (mu.YPos < closestRu.YPos) //East
-                                {
-                                    mu.Move(1);
+                                    ResourceBuilding closestRu = (ResourceBuilding)buildingclosest;
+                                    if (mu.XPos > closestRu.XPos) //North
+                                    {
+                                        mu.Move(0);
+                                    }
+                                    else if (mu.XPos < closestRu.XPos) //South
+                                    {
+                                        mu.Move(2);
+                                    }
+                                    else if (mu.YPos > closestRu.YPos) //West
+                                    {
+                                        mu.Move(3);
+                                    }
+                                    else if (mu.YPos < closestRu.YPos) //East
+                                    {
+                                        mu.Move(1);
+                                    }
                                 }
                             }
                         }
@@ -119,53 +175,109 @@ namespace PeterSpanos_Task3_19013035
                     else
                     {
                         (Unit closest, int distanceTo) = ru.Closest(map.Units);
-                      
-                        //Check In Range
-                        if (distanceTo <= ru.AttackRange)
+                        (Building buildingclosest, int distanceToBuilding) = ru.BuildingClosest(map.Buildings);
+
+                        if (distanceTo > distanceToBuilding)
                         {
-                            ru.IsAttacking = true;
-                            ru.Combat(closest);
-                        }
-                        else //Move Towards
-                        {
-                            if (closest is MeleeUnit)
+                            //Check In Range
+                            if (distanceTo <= ru.AttackRange)
                             {
-                                MeleeUnit closestMu = (MeleeUnit)closest;
-                                if (ru.XPos > closestMu.XPos) //North
+                                ru.IsAttacking = true;
+                                ru.Combat(closest);
+                            }
+                            else //Move Towards
+                            {
+                                if (closest is MeleeUnit)
                                 {
-                                    ru.Move(0);
+                                    MeleeUnit closestMu = (MeleeUnit)closest;
+                                    if (ru.XPos > closestMu.XPos) //North
+                                    {
+                                        ru.Move(0);
+                                    }
+                                    else if (ru.XPos < closestMu.XPos) //South
+                                    {
+                                        ru.Move(2);
+                                    }
+                                    else if (ru.YPos > closestMu.YPos) //West
+                                    {
+                                        ru.Move(3);
+                                    }
+                                    else if (ru.YPos < closestMu.YPos) //East
+                                    {
+                                        ru.Move(1);
+                                    }
                                 }
-                                else if (ru.XPos < closestMu.XPos) //South
+                                else if (closest is RangedUnit)
                                 {
-                                    ru.Move(2);
-                                }
-                                else if (ru.YPos > closestMu.YPos) //West
-                                {
-                                    ru.Move(3);
-                                }
-                                else if (ru.YPos < closestMu.YPos) //East
-                                {
-                                    ru.Move(1);
+                                    RangedUnit closestRu = (RangedUnit)closest;
+                                    if (ru.XPos > closestRu.XPos) //North
+                                    {
+                                        ru.Move(0);
+                                    }
+                                    else if (ru.XPos < closestRu.XPos) //South
+                                    {
+                                        ru.Move(2);
+                                    }
+                                    else if (ru.YPos > closestRu.YPos) //West
+                                    {
+                                        ru.Move(3);
+                                    }
+                                    else if (ru.YPos < closestRu.YPos) //East
+                                    {
+                                        ru.Move(1);
+                                    }
                                 }
                             }
-                            else if (closest is RangedUnit)
+                        }
+                        else
+                        {
+                            //Check In Range
+                            if (distanceTo <= ru.AttackRange)
                             {
-                                RangedUnit closestRu = (RangedUnit)closest;
-                                if (ru.XPos > closestRu.XPos) //North
+                                ru.IsAttacking = true;
+                                ru.Combat(closest);
+                            }
+                            else //Move Towards
+                            {
+                                if (buildingclosest is FactoryBuilding)
                                 {
-                                    ru.Move(0);
+                                    FactoryBuilding closestMu = (FactoryBuilding)buildingclosest;
+                                    if (ru.XPos > closestMu.XPos) //North
+                                    {
+                                        ru.Move(0);
+                                    }
+                                    else if (ru.XPos < closestMu.XPos) //South
+                                    {
+                                        ru.Move(2);
+                                    }
+                                    else if (ru.YPos > closestMu.YPos) //West
+                                    {
+                                        ru.Move(3);
+                                    }
+                                    else if (ru.YPos < closestMu.YPos) //East
+                                    {
+                                        ru.Move(1);
+                                    }
                                 }
-                                else if (ru.XPos < closestRu.XPos) //South
+                                else if (buildingclosest is ResourceBuilding)
                                 {
-                                    ru.Move(2);
-                                }
-                                else if (ru.YPos > closestRu.YPos) //West
-                                {
-                                    ru.Move(3);
-                                }
-                                else if (ru.YPos < closestRu.YPos) //East
-                                {
-                                    ru.Move(1);
+                                    ResourceBuilding closestRu = (ResourceBuilding)buildingclosest;
+                                    if (ru.XPos > closestRu.XPos) //North
+                                    {
+                                        ru.Move(0);
+                                    }
+                                    else if (ru.XPos < closestRu.XPos) //South
+                                    {
+                                        ru.Move(2);
+                                    }
+                                    else if (ru.YPos > closestRu.YPos) //West
+                                    {
+                                        ru.Move(3);
+                                    }
+                                    else if (ru.YPos < closestRu.YPos) //East
+                                    {
+                                        ru.Move(1);
+                                    }
                                 }
                             }
                         }
@@ -176,73 +288,6 @@ namespace PeterSpanos_Task3_19013035
                 else if (map.Units[i] is WizardUnit)
                 {
                     WizardUnit wu = (WizardUnit)map.Units[i];
-                    if (wu.Health == 0)
-                    {
-                        wu.Move(-1);
-                    }
-                    else if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
-                    {
-                        wu.Move(r.Next(0, 4));
-                    }
-                    else
-                    {
-                        (Unit closest, int distanceTo) = wu.Closest(map.Units);
-
-                        //Check In Range
-                        if (distanceTo <= wu.AttackRange)
-                        {
-                            wu.IsAttacking = true;
-                            wu.Combat(closest);
-                        }
-                        else //Move Towards
-                        {
-                            if (closest is MeleeUnit)
-                            {
-                                MeleeUnit closestMu = (MeleeUnit)closest;
-                                if (wu.XPos > closestMu.XPos) //North
-                                {
-                                    wu.Move(0);
-                                }
-                                else if (wu.XPos < closestMu.XPos) //South
-                                {
-                                    wu.Move(2);
-                                }
-                                else if (wu.YPos > closestMu.YPos) //West
-                                {
-                                    wu.Move(3);
-                                }
-                                else if (wu.YPos < closestMu.YPos) //East
-                                {
-                                    wu.Move(1);
-                                }
-                            }
-                            else if (closest is RangedUnit)
-                            {
-                                RangedUnit closestRu = (RangedUnit)closest;
-                                if (wu.XPos > closestRu.XPos) //North
-                                {
-                                    wu.Move(0);
-                                }
-                                else if (wu.XPos < closestRu.XPos) //South
-                                {
-                                    wu.Move(2);
-                                }
-                                else if (wu.YPos > closestRu.YPos) //West
-                                {
-                                    wu.Move(3);
-                                }
-                                else if (wu.YPos < closestRu.YPos) //East
-                                {
-                                    wu.Move(1);
-                                }
-                            }
-                        }
-
-                    }
-                }
-                else if (map.neutralUnits[i] is WizardUnit)
-                {
-                    WizardUnit wu = (WizardUnit)map.neutralUnits[i];
                     if (wu.Health == 0)
                     {
                         wu.Move(-1);
@@ -348,13 +393,13 @@ namespace PeterSpanos_Task3_19013035
                 WizardUnit end = (WizardUnit)b;
                 distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
             }
-            else if (a is WizardUnit && b is MeleeUnit)
+            else if (a is MeleeUnit && b is WizardUnit)
             {
                 WizardUnit start = (WizardUnit)a;
                 MeleeUnit end = (MeleeUnit)b;
                 distance = Math.Abs(start.XPos - end.XPos) + Math.Abs(start.YPos - end.YPos);
             }
-            else if (a is WizardUnit && b is RangedUnit)
+            else if (a is RangedUnit && b is WizardUnit)
             {
                 WizardUnit start = (WizardUnit)a;
                 RangedUnit end = (RangedUnit)b;

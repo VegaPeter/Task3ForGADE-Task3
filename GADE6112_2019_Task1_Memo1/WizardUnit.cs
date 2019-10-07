@@ -93,13 +93,21 @@ namespace PeterSpanos_Task3_19013035
         //Method to handle where the unit moves
         public override void Move(int dir)
         {
-            switch (dir)
+            if (dir == 0 && YPos > 0)
             {
-                case 0: YPos--; break; //North
-                case 1: XPos++; break; //East
-                case 2: YPos++; break; //South
-                case 3: XPos--; break; //West
-                default: break;
+                YPos--;
+            }
+            else if (dir == 1 && XPos < 9)
+            {
+                XPos++;
+            }
+            else if (dir == 2 && YPos < 9)
+            {
+                YPos++;
+            }
+            else if (dir == 3 && XPos > 0)
+            {
+                XPos--;
             }
         }
 
@@ -141,11 +149,6 @@ namespace PeterSpanos_Task3_19013035
             {
                 otherX = ((RangedUnit)other).XPos;
                 otherY = ((RangedUnit)other).YPos;
-            }
-            else if (other is WizardUnit)
-            {
-                otherX = ((WizardUnit)other).XPos;
-                otherY = ((WizardUnit)other).YPos;
             }
             else if (otherino is FactoryBuilding)
             {
@@ -198,19 +201,7 @@ namespace PeterSpanos_Task3_19013035
                         shortest = distance;
                         closest = otherRu;
                     }
-                }
-                else if (u is WizardUnit)
-                {
-                    WizardUnit otherWu = (WizardUnit)u;
-                    int distance = Math.Abs(this.XPos - otherWu.XPos)
-                               + Math.Abs(this.YPos - otherWu.YPos);
-                    if (distance < shortest)
-                    {
-                        shortest = distance;
-                        closest = otherWu;
-                    }
-                }
-
+                }             
             }
             return (closest, shortest);
         }

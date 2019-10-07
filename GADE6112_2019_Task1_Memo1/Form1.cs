@@ -16,8 +16,8 @@ namespace PeterSpanos_Task3_19013035
     {
         GameEngine engine;
         BinaryFormatter bf = new BinaryFormatter();
-        int mapHeight,
-            mapWidth;
+        const int mapHeight = 10,
+            mapWidth =10;
 
         public Form1()
         {
@@ -128,8 +128,9 @@ namespace PeterSpanos_Task3_19013035
 
         private void btnEnter_Click(object sender, EventArgs e)
         {
-            mapHeight = Convert.ToInt32(txtHeight.Text);
-            mapWidth = Convert.ToInt32(txtWidth.Text);
+            //Incase players wish to edit the map size
+            //mapHeight = Convert.ToInt32(txtHeight.Text);
+            //mapWidth = Convert.ToInt32(txtWidth.Text);
 
             btnEnter.Visible = false;
             lblHeight.Visible = false;

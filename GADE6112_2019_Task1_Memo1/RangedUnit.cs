@@ -101,13 +101,21 @@ namespace PeterSpanos_Task3_19013035
         //Method to handle where the unit moves
         public override void Move(int dir)
         {
-            switch(dir)
+            if (dir == 0 && YPos > 0)
             {
-                case 0: YPos--;  break; //North
-                case 1: XPos++; break; //East
-                case 2: YPos++;  break; //South
-                case 3: XPos--;  break; //West
-                default: break;
+                YPos--;
+            }
+            else if (dir == 1 && XPos < 9)
+            {
+                XPos++;
+            }
+            else if (dir == 2 && YPos < 9)
+            {
+                YPos++;
+            }
+            else if (dir == 3 && XPos > 0)
+            {
+                XPos--;
             }
         }
 
@@ -123,8 +131,13 @@ namespace PeterSpanos_Task3_19013035
                 RangedUnit ru = (RangedUnit)attacker;
                 Health = Health - (ru.Attack - ru.AttackRange);
             }
+            else if (attacker is WizardUnit)
+            {
+                WizardUnit wu = (WizardUnit)attacker;
+                Health = Health - (wu.Attack - wu.AttackRange);
+            }
 
-            if(Health <= 0)
+            if (Health <= 0)
             {
                 Death(); //Me_IRL
             }
@@ -145,6 +158,11 @@ namespace PeterSpanos_Task3_19013035
             {
                 otherX = ((RangedUnit)other).XPos;
                 otherY = ((RangedUnit)other).YPos;
+            }
+            else if (other is WizardUnit)
+            {
+                otherX = ((WizardUnit)other).XPos;
+                otherY = ((WizardUnit)other).YPos;
             }
             else if (otherino is FactoryBuilding)
             {
@@ -198,7 +216,53 @@ namespace PeterSpanos_Task3_19013035
                         closest = otherRu;
                     }
                 }
+                else if (u is WizardUnit)
+                {
+                    WizardUnit otherWu = (WizardUnit)u;
+                    int distance = Math.Abs(this.XPos - otherWu.XPos)
+                               + Math.Abs(this.YPos - otherWu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherWu;
+                    }
+                }
 
+            }
+            return (closest, shortest);
+        }
+
+        //Determines the closest building
+        public (Building, int) BuildingClosest(List<Building> buildings)
+        {
+            int shortest = 100;
+            Building closest = null;
+
+            //Closest Unit and Distance                    
+            foreach (Building u in buildings)
+            {
+                if (u is FactoryBuilding)
+                {
+                    FactoryBuilding otherMu = (FactoryBuilding)u;
+                    int distance = Math.Abs(this.XPos - otherMu.XPos)
+                               + Math.Abs(this.YPos - otherMu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherMu;
+                    }
+                }
+                else if (u is ResourceBuilding)
+                {
+                    ResourceBuilding otherRu = (ResourceBuilding)u;
+                    int distance = Math.Abs(this.XPos - otherRu.XPos)
+                               + Math.Abs(this.YPos - otherRu.YPos);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRu;
+                    }
+                }
             }
             return (closest, shortest);
         }
