@@ -301,6 +301,17 @@ namespace PeterSpanos_Task3_19013035
                     }
                 }
             }
+
+            //Handles ToString for neutral wizards
+            foreach(Unit nwu in neutralUnits)
+            {
+                WizardUnit wu = (WizardUnit)nwu;
+                if (wu.XPos == x && wu.YPos == y)
+                {
+                    txtInfo.Text = "";
+                    txtInfo.Text = wu.ToString();
+                }
+            }
         }
 
         //Adds a building's info to the ToString
@@ -310,8 +321,8 @@ namespace PeterSpanos_Task3_19013035
 
             Button b = (Button)sender;
 
-            x = b.Location.X / width;
-            y = b.Location.Y / height;
+            x = b.Location.X / 30;
+            y = b.Location.Y / 30;
 
             foreach (Building bud in buildings)
             {
