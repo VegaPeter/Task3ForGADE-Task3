@@ -68,21 +68,21 @@ namespace PeterSpanos_Task3_19013035
             {
                 if (r.Next(0, 3) == 0) //Generate Melee Unit
                 {
-                    MeleeUnit m = new MeleeUnit(r.Next(0, 10),
-                                                r.Next(0, 10),
+                    MeleeUnit m = new MeleeUnit(r.Next(0, 12),
+                                                r.Next(0, 12),
                                                 100,
                                                 1,
-                                                20,
+                                                25,
                                                 (i % 2 == 0 ? 1 : 0),
                                                 "M/");
                     units.Add(m);
                 }
                 else if (r.Next(0, 3) == 1) // Generate Ranged Unit
                 {
-                    RangedUnit ru = new RangedUnit(r.Next(0, 10),
-                                                r.Next(0, 10),
-                                                100,
-                                                1,
+                    RangedUnit ru = new RangedUnit(r.Next(0, 12),
+                                                r.Next(0, 12),
+                                                75,
+                                                2,
                                                 20,
                                                 5,
                                                 (i % 2 == 0 ? 1 : 0),
@@ -91,11 +91,11 @@ namespace PeterSpanos_Task3_19013035
                 }
                 else
                 {
-                    WizardUnit wu = new WizardUnit(r.Next(0, 10),
-                                                r.Next(0, 10),
-                                                100,
-                                                1,
-                                                20,
+                    WizardUnit wu = new WizardUnit(r.Next(0, 15),
+                                                r.Next(0, 15),
+                                                50,
+                                                5,
+                                                50,
                                                 1,
                                                 (i % 2 == 0 ? 1 : 0),
                                                 "W-");
@@ -107,8 +107,8 @@ namespace PeterSpanos_Task3_19013035
             {
                 if (r.Next(0, 2) == 0) //Generate Resource Building
                 {
-                    ResourceBuilding rb = new ResourceBuilding(r.Next(0, 10),
-                                                               r.Next(0, 10),
+                    ResourceBuilding rb = new ResourceBuilding(r.Next(0, 15),
+                                                               r.Next(0, 15),
                                                                150,
                                                                (k % 2 == 0 ? 1 : 0),
                                                                "[G]",
@@ -117,8 +117,8 @@ namespace PeterSpanos_Task3_19013035
                 }
                 else //Generate Unit Building
                 {
-                    FactoryBuilding fb = new FactoryBuilding(r.Next(0, 10),
-                                                             r.Next(0, 10),
+                    FactoryBuilding fb = new FactoryBuilding(r.Next(0, 15),
+                                                             r.Next(0, 15),
                                                              200,
                                                              (k % 2 == 0 ? 1 : 0),
                                                              "[F]",
@@ -132,8 +132,8 @@ namespace PeterSpanos_Task3_19013035
             //Neutral Team
             for (int i = 0; i < (numUnits/2); i++)
             {
-               WizardUnit nwu = new WizardUnit(r.Next(0, 10),
-                                              r.Next(0, 10),
+               WizardUnit nwu = new WizardUnit(r.Next(0, 15),
+                                              r.Next(0, 15),
                                               25,
                                               1,
                                               30,

@@ -35,12 +35,17 @@ namespace PeterSpanos_Task3_19013035
         //Updates the map to display the units' movement, combat and deaths
         public void Update()
         {
+          
             for(int i = 0; i < map.Units.Count; i++)
             {
                 if (map.Units[i] is MeleeUnit)
                 {
                     MeleeUnit mu = (MeleeUnit)map.Units[i];
-                    if (mu.Health <= mu.MaxHealth * 0.25) // Running Away
+                    if(mu.Health == 0)
+                    {
+                        mu.Move(-1);
+                    }
+                    else if (mu.Health <= mu.MaxHealth * 0.25) // Running Away
                     {
                         mu.Move(r.Next(0, 4));
                     }
@@ -103,7 +108,11 @@ namespace PeterSpanos_Task3_19013035
                 else if (map.Units[i] is RangedUnit)
                 {
                     RangedUnit ru = (RangedUnit)map.Units[i];
-                   if (ru.Health <= ru.MaxHealth * 0.25) 
+                    if (ru.Health == 0)
+                    {
+                        ru.Move(-1);
+                    }
+                    else if (ru.Health <= ru.MaxHealth * 0.25) 
                     {
                         ru.Move(r.Next(0, 4));
                     }
@@ -167,7 +176,11 @@ namespace PeterSpanos_Task3_19013035
                 else if (map.Units[i] is WizardUnit)
                 {
                     WizardUnit wu = (WizardUnit)map.Units[i];
-                    if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
+                    if (wu.Health == 0)
+                    {
+                        wu.Move(-1);
+                    }
+                    else if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
                     {
                         wu.Move(r.Next(0, 4));
                     }
@@ -230,7 +243,11 @@ namespace PeterSpanos_Task3_19013035
                 else if (map.neutralUnits[i] is WizardUnit)
                 {
                     WizardUnit wu = (WizardUnit)map.neutralUnits[i];
-                    if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
+                    if (wu.Health == 0)
+                    {
+                        wu.Move(-1);
+                    }
+                    else if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
                     {
                         wu.Move(r.Next(0, 4));
                     }
